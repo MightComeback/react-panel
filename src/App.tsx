@@ -5,6 +5,7 @@ import "./index.css";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import NoPage from "./pages/NoPage";
+import Todo from "./pages/Todo";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/todo" element={<Todo />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
