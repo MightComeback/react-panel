@@ -1,6 +1,6 @@
 import React from "react";
 
-const Task = ({ title }: { title: string }) => {
+const TaskComponent = ({ title }: { title: string }) => {
   return (
     <div
       className="rounded-xl px-8 py-4 border border-gray-200
@@ -21,4 +21,4 @@ const Task = ({ title }: { title: string }) => {
   );
 };
 
-export default Task;
+export default TaskComponent;
