@@ -1,19 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TaskComponent from "../../components/TaskComponent";
 import Task from "../../model/Task";
 
 const Todo = () => {
-  async function run() {
-    try {
-      const task = await Task.findOne({ title: "default" }).exec();
-      console.log(task);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  const [data, setData] = useState([]);
 
-  run();
-
+  useEffect(() => {
+    fetch("/todo").then(async (res) => {
+      try {
+        const data = await res.json();
+        console.log(data);
+      } catch (err) {
+        console.log("Error");
+        console.log(err);
+      }
+    });
+  }, []);
   return (
     <>
       <div className="flex py-12 flex-col">
@@ -26,6 +28,7 @@ const Todo = () => {
               <TaskComponent title={task.title} />
             </div>
           ))} */}
+          <p>{data}</p>
         </section>
       </div>
     </>

@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "http://localhost:5137",
   "scripts": {
     "dev": "vite & npx nodemon server.js",
     "build": "vite build",
