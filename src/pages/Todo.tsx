@@ -1,38 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TaskComponent from "../../components/TaskComponent";
+import Task from "../../model/Task";
 
 const Todo = () => {
-  const tasks = [];
+  async function run() {
+    try {
+      const task = await Task.findOne({ title: "default" }).exec();
+      console.log(task);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  run();
 
   return (
-    <div className="flex py-12 flex-col">
-      <div className="mb-16 w-full flex justify-center">
-        <h1 className="text-xl uppercase">Your tasks:</h1>
-      </div>
-      <section className="space-y-6 ml-24">
-        <TaskComponent
-          title="
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam sit minima ab laboriosam possimus commodi vel. Repellendus in tempore nulla!"
-        />
-        <TaskComponent title="task2" />
-        <div
-          className="rounded-xl px-8 py-4 border border-gray-200
-       flex w-80 items-center justify-between"
-        >
-          <div className="flex flex-wrap mr-3">
-            <h3 className="text-lg">example</h3>
-          </div>
-          <div>
-            <button
-              className="uppercase text-xs
-              bg-gray-100 rounded-md p-1"
-            >
-              done
-            </button>
-          </div>
+    <>
+      <div className="flex py-12 flex-col">
+        <div className="mb-16 w-full flex justify-center">
+          <h1 className="text-xl uppercase">Your tasks:</h1>
         </div>
-      </section>
-    </div>
+        <section className="space-y-6 ml-24">
+          {/* {tasks.map((task, idx) => (
+            <div key={idx}>
+              <TaskComponent title={task.title} />
+            </div>
+          ))} */}
+        </section>
+      </div>
+    </>
   );
 };
 
