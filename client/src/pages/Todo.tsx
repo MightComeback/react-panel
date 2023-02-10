@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import TaskComponent from "../../components/TaskComponent";
+import TaskComponent from "../components/TaskComponent";
 import Task from "../../../server/model/Task";
 
 type Task = {
@@ -19,8 +19,8 @@ const Todo = () => {
   };
 
   useEffect(() => {
-    taskData.map((task) => console.log(task["title"]));
-  }, [getTaskDataFromServer]);
+    getTaskDataFromServer();
+  }, []);
 
   return (
     <div className="flex py-12 flex-col">
@@ -28,16 +28,11 @@ const Todo = () => {
         <h1 className="text-xl uppercase">Your tasks:</h1>
       </div>
       <section className="space-y-6 ml-24">
-        <button
-          onClick={() => {
-            getTaskDataFromServer();
-          }}
-        >
-          GetData
-        </button>
         <div>
           {taskData.map((task, idx) => (
-            <p key={idx}>{task["title"]}</p>
+            <div className="my-4" key={idx}>
+              <TaskComponent title={task["title"]} />
+            </div>
           ))}
         </div>
       </section>
