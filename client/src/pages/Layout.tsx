@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setCurrentNavPage, setIsNavOpen } from "../redux/slices/navSlice";
 
 const Layout = () => {
-  const [navActive, setNavActive] = useState(0);
+  const navManagement = useAppSelector(
+    (state) => state.navStateManagement.currentNavPage
+  );
+
+  const navDispatch = useAppDispatch();
 
   return (
     <>
@@ -12,10 +18,22 @@ const Layout = () => {
       >
         <ul className="[&_li]:border-b [&_li]:my-4 [&_li]:active:bg-red-100">
           <li>
-            <Link to="/">Home</Link>
+            <Link
+              onClick={() => {
+                navDispatch(setCurrentNavPage("home"));
+              }}
+              to="/"
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/todo">To-do</Link>
+            <Link
+              onClick={() => navDispatch(setCurrentNavPage("todo"))}
+              to="/todo"
+            >
+              To-do
+            </Link>
           </li>
         </ul>
       </nav>
