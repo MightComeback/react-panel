@@ -21,7 +21,7 @@ const TaskComponent = ({ title }: { title: string }) => {
        flex w-80 items-center justify-between"
     >
       <div className="flex flex-wrap mr-3">
-        <h3 className="text-lg">{title}</h3>
+        <h3 className="text-lg text-gray-600">{title}</h3>
       </div>
       <div>
         <button
