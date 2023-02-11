@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TaskComponent from "../components/TaskComponent";
 import Task from "../../../server/model/Task";
-import { setCurrentNavPage } from "../redux/slices/navSlice";
-import { useAppDispatch } from "../redux/hooks";
+import { setCurrentNavPage, setIsNavOpen } from "../redux/slices/navSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 const Todo = () => {
   const [taskData, setTaskData] = useState([{}]);
   const [inputTaskData, setInputTaskData] = useState("");
+  const navOpen = useAppSelector((state) => state.navStateManagement.isNavOpen);
+
   const navDispatch = useAppDispatch();
 
   const getTaskDataFromServer = () => {
@@ -30,10 +32,11 @@ const Todo = () => {
   useEffect(() => {
     getTaskDataFromServer();
     navDispatch(setCurrentNavPage("todo"));
+    navDispatch(setIsNavOpen(!navOpen));
   }, []);
 
   return (
-    <div className="flex py-12 flex-col">
+    <div className="flex py-6 flex-col">
       <div className="mb-16 w-full flex justify-center border-b pb-4">
         <h1 className="text-xl uppercase text-gray-600">Your tasks: </h1>
       </div>

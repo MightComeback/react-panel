@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../redux/hooks";
-import { setCurrentNavPage } from "../redux/slices/navSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setCurrentNavPage, setIsNavOpen } from "../redux/slices/navSlice";
 
 const Home = () => {
+  const navOpen = useAppSelector((state) => state.navStateManagement.isNavOpen);
+
   const navDispatch = useAppDispatch();
 
   useEffect(() => {
     navDispatch(setCurrentNavPage("home"));
+    navDispatch(setIsNavOpen(!navOpen));
   }, []);
 
   return (
