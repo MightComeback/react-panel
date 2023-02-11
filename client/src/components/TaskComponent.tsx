@@ -18,7 +18,7 @@ const TaskComponent = ({ title }: { title: string }) => {
   return (
     <div
       className="rounded-xl px-8 py-4 border border-gray-200
-       flex w-80 items-center justify-between"
+       flex max-w-80 sm:w-80 items-center justify-between"
     >
       <div className="flex flex-wrap mr-3">
         <h3 className="text-lg text-gray-600">{title}</h3>

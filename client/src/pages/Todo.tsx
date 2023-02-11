@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TaskComponent from "../components/TaskComponent";
 import Task from "../../../server/model/Task";
+import { setCurrentNavPage } from "../redux/slices/navSlice";
+import { useAppDispatch } from "../redux/hooks";
 
 const Todo = () => {
   const [taskData, setTaskData] = useState([{}]);
   const [inputTaskData, setInputTaskData] = useState("");
+  const navDispatch = useAppDispatch();
 
   const getTaskDataFromServer = () => {
     axios
@@ -26,6 +29,7 @@ const Todo = () => {
 
   useEffect(() => {
     getTaskDataFromServer();
+    navDispatch(setCurrentNavPage("todo"));
   }, []);
 
   return (
@@ -33,7 +37,7 @@ const Todo = () => {
       <div className="mb-16 w-full flex justify-center border-b pb-4">
         <h1 className="text-xl uppercase text-gray-600">Your tasks: </h1>
       </div>
-      <section className="space-y-6 mx-24 max-w-6xl flex flex-col md:flex-row justify-between">
+      <section className="space-y-6 mx-auto md:mx-24 max-w-6xl flex flex-col md:flex-row justify-between">
         <div>
           {taskData.map((task, idx) => (
             <div className="my-4" key={idx}>
