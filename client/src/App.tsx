@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import NoPage from "./pages/NoPage";
 import Todo from "./pages/Todo";
+import Statistics from "./pages/Statistics";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/todo" element={<Todo />} />
+          <Route path="/stats" element={<Statistics />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

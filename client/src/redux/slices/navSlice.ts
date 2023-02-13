@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentNavPage: '',
-  isNavOpen: true,
+  isNavOpen: false,
 }
 
 export const navSlice = createSlice({

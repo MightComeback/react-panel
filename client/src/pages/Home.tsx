@@ -4,13 +4,11 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setCurrentNavPage, setIsNavOpen } from "../redux/slices/navSlice";
 
 const Home = () => {
-  const navOpen = useAppSelector((state) => state.navStateManagement.isNavOpen);
-
   const navDispatch = useAppDispatch();
 
   useEffect(() => {
     navDispatch(setCurrentNavPage("home"));
-    navDispatch(setIsNavOpen(!navOpen));
+    navDispatch(setIsNavOpen(false));
   }, []);
 
   return (

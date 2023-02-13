@@ -33,6 +33,9 @@ const Layout = () => {
           <li className={navPageOpen === "todo" ? "bg-red-50" : "bg-white"}>
             <Link to="/todo">To-do</Link>
           </li>
+          <li className={navPageOpen === "stats" ? "bg-red-50" : "bg-white"}>
+            <Link to="/stats">Statistics</Link>
+          </li>
         </ul>
       </nav>
       <Outlet />

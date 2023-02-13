@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TaskComponent from "../components/TaskComponent";
-import Task from "../../../server/model/Task";
 import { setCurrentNavPage, setIsNavOpen } from "../redux/slices/navSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 const Todo = () => {
   const [taskData, setTaskData] = useState([{}]);
   const [inputTaskData, setInputTaskData] = useState("");
-  const navOpen = useAppSelector((state) => state.navStateManagement.isNavOpen);
 
   const navDispatch = useAppDispatch();
 
@@ -32,7 +30,7 @@ const Todo = () => {
   useEffect(() => {
     getTaskDataFromServer();
     navDispatch(setCurrentNavPage("todo"));
-    navDispatch(setIsNavOpen(!navOpen));
+    navDispatch(setIsNavOpen(false));
   }, []);
 
   return (

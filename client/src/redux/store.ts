@@ -3,7 +3,7 @@ import navSliceReducer from './slices/navSlice';
 
 export const store = configureStore({
   reducer: {
-    navStateManagement: navSliceReducer
+    navStateManagement: navSliceReducer,
   },
 })
 
