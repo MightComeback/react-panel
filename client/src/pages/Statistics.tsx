@@ -1,12 +1,31 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import CoinComponent from "../components/CoinComponent";
 import { useAppDispatch } from "../redux/hooks";
 import { setIsNavOpen, setCurrentNavPage } from "../redux/slices/navSlice";
+import ReactECharts from "echarts-for-react";
 
 const Statistics = () => {
   const [coinData, setCoinData] = useState([{}]);
+  const [chartOptions, setChartOptions] = useState({});
   const [coinDataIsLoaded, setCoinDataIsLoaded] = useState(false);
   const navDispatch = useAppDispatch();
+
+  let options = {
+    xAxis: {
+      type: "category",
+      data: ["1h", "24h", "7d", "30d", "60d", "90d"],
+    },
+    yAxis: {
+      type: "percent %",
+    },
+    series: [
+      {
+        data: [],
+        type: "bar",
+      },
+    ],
+  };
 
   const getCoinDataFromServer = () => {
     axios
@@ -31,30 +50,41 @@ const Statistics = () => {
         <section className="px-8 flex items-center justify-center flex-wrap">
           {coinData.map((coin, idx) => (
             <div
-              className="shadow-md w-full max-w-[16rem] h-full p-2 m-4 rounded-lg
+              className="shadow-md w-full max-w-5xl h-full p-2 m-4 rounded-lg
              flex flex-col space-y-2"
               key={idx}
             >
-              <div className="flex items-center justify-start">
-                <h2 className="text-bold text-sm">
-                  {coin["name"]} -{" "}
-                  <span className="text-gray-500">{coin["symbol"]}</span> -{" "}
-                  <span className="text-yellow-300">{coin["cmc_rank"]}</span>
-                </h2>
-              </div>
-              <div className="">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-md mr-2">
-                    ${coin["quote"].USD.price.toFixed(2)}
-                  </h3>
-                  <p>
-                    24h change:{" "}
-                    <span className="text-green-300">
-                      ${coin["quote"].USD.volume_change_24h.toFixed(2)}
-                    </span>
-                  </p>
-                </div>
-              </div>
+              <CoinComponent
+                name={coin["name"]}
+                symbol={coin["symbol"]}
+                rank={coin["cmc_rank"]}
+                price={coin["quote"].USD.price}
+                volume_24h={coin["quote"].USD.volume_change_24h}
+              />
+              <ReactECharts
+                option={{
+                  xAxis: {
+                    type: "category",
+                    data: ["1h", "24h", "7d", "30d", "60d", "90d"],
+                  },
+                  yAxis: {
+                    type: "value",
+                  },
+                  series: [
+                    {
+                      data: [
+                        coin["quote"].USD.percent_change_1h,
+                        coin["quote"].USD.percent_change_24h,
+                        coin["quote"].USD.percent_change_7d,
+                        coin["quote"].USD.percent_change_30d,
+                        coin["quote"].USD.percent_change_60d,
+                        coin["quote"].USD.percent_change_90d,
+                      ],
+                      type: "bar",
+                    },
+                  ],
+                }}
+              />
             </div>
           ))}
         </section>
